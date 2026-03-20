@@ -88,6 +88,27 @@ export default function Home() {
   const prevSlide = () =>
     setCurrent((prev) => (prev - 1 + banners.length) % banners.length);
 
+  // Touch swipe support for mobile
+  const touchStartX = useRef<number | null>(null);
+  const touchEndX = useRef<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.changedTouches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    touchEndX.current = e.changedTouches[0].clientX;
+    if (touchStartX.current !== null && touchEndX.current !== null) {
+      const diff = touchStartX.current - touchEndX.current;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) nextSlide();
+        else prevSlide();
+      }
+    }
+    touchStartX.current = null;
+    touchEndX.current = null;
+  };
+
   /* ===================== */
   /* PROJECTS FROM FIRESTORE */
   /* ===================== */
@@ -128,7 +149,11 @@ export default function Home() {
       {/* ===================== */}
       {/* SECTION 1: HERO CAROUSEL */}
       {/* ===================== */}
-      <div className="relative h-[85vh] overflow-hidden">
+      <div
+        className="relative h-[85vh] overflow-hidden"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
         <img
           src={banners[current]}
           alt="Banner"
@@ -175,10 +200,10 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Navigation Arrows */}
+        {/* Navigation Arrows — hidden on mobile, visible on md+ */}
         <button
           onClick={prevSlide}
-          className="absolute left-6 top-1/2 -translate-y-1/2 w-14 h-14 flex items-center justify-center bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white border border-white/30 transition-all duration-300 group z-10"
+          className="hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 w-14 h-14 items-center justify-center bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white border border-white/30 transition-all duration-300 group z-10"
         >
           <svg
             className="w-6 h-6 transform group-hover:-translate-x-1 transition-transform"
@@ -197,7 +222,7 @@ export default function Home() {
 
         <button
           onClick={nextSlide}
-          className="absolute right-6 top-1/2 -translate-y-1/2 w-14 h-14 flex items-center justify-center bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white border border-white/30 transition-all duration-300 group z-10"
+          className="hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 w-14 h-14 items-center justify-center bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white border border-white/30 transition-all duration-300 group z-10"
         >
           <svg
             className="w-6 h-6 transform group-hover:translate-x-1 transition-transform"

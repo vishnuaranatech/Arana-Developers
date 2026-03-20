@@ -564,4 +564,4 @@ function DetailRow({ label, value }: { label: string; value: string }) {
       <span className="text-sm text-white font-light">{value}</span>
     </div>
   );
-}
+}  

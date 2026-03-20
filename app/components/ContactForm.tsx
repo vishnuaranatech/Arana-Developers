@@ -178,7 +178,7 @@ export default function ContactForm() {
                 className="w-full px-8 py-4 bg-gray-900 text-white hover:bg-amber-500 transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <span className="text-sm tracking-[0.2em] uppercase font-light">
-                  {loading ? "Submitting..." : "Submit Enquiry"}
+                  {loading ? "Submitting..." : "Start your construction"}
                 </span>
               </button>
 
