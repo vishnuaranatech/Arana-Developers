@@ -164,7 +164,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-r from-slate-900/80 via-slate-900/40 to-transparent" />
 
         {/* Hero Content */}
-        <div className="absolute inset-0 flex items-center">
+        <div className="absolute inset-0 flex items-start pt-16 lg:items-center lg:pt-0">
           <div className="max-w-7xl mx-auto px-6 w-full">
             <div className="max-w-3xl">
               <div className="h-[1px] w-16 bg-amber-500 mb-8 animate-[slideRight_1s_ease-out]" />
@@ -185,10 +185,10 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Founder Image */}
-        <div className="absolute bottom-0 right-8 hidden lg:block animate-[fadeInUp_1s_ease-out_0.6s_both]">
+        {/* Founder Image — visible on all screens, sized responsively */}
+        <div className="absolute bottom-0 right-4 lg:right-8 block animate-[fadeInUp_1s_ease-out_0.6s_both]">
           <div className="relative group">
-            <div className="relative overflow-hidden w-80 h-[420px]">
+            <div className="relative overflow-hidden w-52 h-72 sm:w-64 sm:h-80 lg:w-80 lg:h-[420px]">
               <Image
                 src={founderImage}
                 alt="Founder"
@@ -240,7 +240,7 @@ export default function Home() {
         </button>
 
         {/* Dot Indicators */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-10">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-20">
           {banners.map((_, index) => (
             <button
               key={index}
